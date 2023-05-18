@@ -1,32 +1,43 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Bank {
-    private Map<Client, List<Account>> clientsAccounts;
+    private Map<Client, Set<Account>> clientsAccounts;
+    private Map<Account, Client> accountToClientMap;
 
     public Bank() {
         clientsAccounts = new HashMap<>();
+        accountToClientMap = new HashMap<>();
     }
 
     public void addClient(Client client) {
-        clientsAccounts.put(client, new ArrayList<>());
+        if (!clientsAccounts.containsKey(client)) {
+            clientsAccounts.put(client, new HashSet<>());
+        } else {
+            System.out.println("Клиент уже существует: " + client.getName());
+        }
     }
 
     public void addAccount(Client client, Account account) {
-        List<Account> clientAccounts = clientsAccounts.get(client);
-        if (clientAccounts != null) clientAccounts.add(account);
+        Set<Account> clientAccounts = clientsAccounts.get(client);
+
+        if (clientAccounts == null) {
+            throw new IllegalArgumentException("Клиент не сохранен в банке: " + client.getName());
+        }
+
+        clientAccounts.add(account);
+        accountToClientMap.put(account, client);
     }
 
+
     public List<Account> getAccounts(Client client) {
-        return clientsAccounts.getOrDefault(client, new ArrayList<>());
+        Set<Account> clientAccounts = clientsAccounts.getOrDefault(client, new HashSet<>());
+        if (clientAccounts.isEmpty()) {
+            throw new IllegalArgumentException("У клиента нет счетов: " + client.getName());
+        }
+        return new ArrayList<>(clientAccounts);
     }
 
     public Client findClient(Account account) {
-        for (Map.Entry<Client, List<Account>> entry: clientsAccounts.entrySet()) {
-            if (entry.getValue().contains(account)) return entry.getKey();
-        }
-        return null;
+        return accountToClientMap.get(account);
     }
 }

@@ -19,7 +19,7 @@ public class Main {
         Account account3 = new Account();
         bank.addAccount(client1, account3);
 
-        List<Account> accounts = bank.getAccounts(client1);
+        List<Account> accounts = bank.getAccounts(new Client("John", 30));
         System.out.println("Счета клиента 1:");
 
         for (Account account: accounts) {
