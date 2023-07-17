@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Студенты</title>
+<!--  <style>-->
+<!--    table {-->
+<!--      border-collapse: collapse;-->
+<!--    }-->
+
+<!--  </style>-->
+  <style>
+    h1 {
+      color: steelblue;
+    }
+
+    .students-tab {
+      border: 1px solid steelblue;
+      width: 250px;
+      border-collapse: collapse;
+      margin-bottom: 50px;
+    }
+
+    .students-tab tr td {
+      border: 1px solid steelblue;
+    }
+
+    th, td {
+      border: 1px solid steelblue;
+      padding: 8px;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Студенты</h1>
+<form id="studentForm">
+  <label for="name">Имя студента:</label>
+  <input type="text" id="name" required><br>
+
+  <label for="dob">Дата рождения:</label>
+  <input type="date" id="dob" required><br>
+
+  <label for="gender">Пол:</label>
+  <select id="gender" required>
+    <option value="мужчина">Мужчина</option>
+    <option value="женщина">Женщина</option>
+  </select><br>
+
+  <button type="submit">Добавить</button>
+</form>
+
+<table class="students-tab" id="studentTable">
+  <thead>
+  <tr>
+    <th>Имя студента</th>
+    <th>Пол</th>
+    <th>Дата рождения</th>
+    <th>Возраст</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Строки с данными о студентах будут добавлены здесь -->
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="3">Средний возраст студентов</td>
+    <td id="averageAge">0</td>
+  </tr>
+  </tfoot>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>
